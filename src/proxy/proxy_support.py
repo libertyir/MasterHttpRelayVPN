@@ -17,6 +17,7 @@ from core.constants import (
     CACHE_TTL_STATIC_MED,
     STATIC_EXTS,
 )
+from src.geo.rule_engine import match_host_with_rules
 
 __all__ = [
     "is_ip_literal",
@@ -90,11 +91,8 @@ def load_host_rules(raw) -> tuple[set[str], tuple[str, ...]]:
 
 
 def host_matches_rules(host: str, rules: tuple[set[str], tuple[str, ...]]) -> bool:
-    exact, suffixes = rules
-    normalized = host.lower().rstrip(".")
-    if normalized in exact:
-        return True
-    return any(normalized.endswith(suffix) for suffix in suffixes)
+    return match_host_with_rules(host, rules)
+
 
 
 def header_value(headers: dict | None, name: str) -> str:
@@ -310,3 +308,8 @@ def inject_cors_headers(response: bytes, origin: str) -> bytes:
         "Vary: Origin",
     ]
     return ("\r\n".join(lines) + "\r\n\r\n").encode() + body
+
+
+
+    
+    

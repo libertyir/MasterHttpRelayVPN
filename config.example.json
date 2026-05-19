@@ -29,8 +29,13 @@
 		".doubleclick.net"
 	],
 	"direct_hosts": [
-		"rubika.ir",
-		"soft98.ir"
+		"collector.github.com",
+		"api.github.com",
+		"www.github.com",
+		"regex:^github\\.com$",
+		"geosite:ir",
+		"geoip:ir",
+		"geosite:deepseek"
 	],
 	"youtube_via_relay": false,
 	"hosts": {
